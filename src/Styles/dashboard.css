@@ -1,0 +1,53 @@
+.dashboardHeader{
+    display: flex;
+    justify-content: space-between;
+}
+.legend-item {
+    list-style-type: none;
+    position: relative;
+    padding-left: 1.5em; /* Adjust the padding as needed */
+  }
+  
+  .legend-item::before {
+    content: "";
+    display: inline-block;
+    width: 15px; /* Adjust the size of the dot */
+    height: 15px; /* Adjust the size of the dot */
+    border-radius: 50%;
+    background-color: currentColor; /* This will inherit the color from the li's color */
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .numberCircle{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    
+  }
+  .numberCircle p{
+  margin-top: 10px;
+  font-weight: 500;
+  color: white;
+  }
+  
+  .custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.custom-file-upload:hover {
+    background-color: #e0e0e0;
+}
+input[type="file"] {
+    display: none;
+}
+span{
+    font-family: 'Inter';
+}

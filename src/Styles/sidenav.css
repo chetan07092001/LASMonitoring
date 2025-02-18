@@ -1,0 +1,63 @@
+nav{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    flex: 20%;
+    color: #4B7BEC ;
+}
+.userdetail{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+#username{
+    font-family:'Epilogue';
+    font-weight:800;
+}
+.userdetail p{
+    font-family:'Epilogue';
+    font-weight:300;
+}
+.navbuttons{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.navbutton{
+    border: none;
+    background: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+.navbutton:hover{
+    background:#F1F5FE;
+    font:500;
+}
+.navbutton label{
+    font-family: 'Inter';
+   font-weight: 400;
+   text-decoration: none;
+   
+}
+
+.mainHeader{
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.Mui-selected
+{
+    color: white !important;
+    background-color: #4B7BEC !important;
+    border-radius: 5px !important;
+}
+

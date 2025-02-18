@@ -1,0 +1,64 @@
+import React, { useState } from 'react';
+import bootbox from 'bootbox';
+import 'bootbox/dist/bootbox.min.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Loader.css'; // Assuming you have the CSS in this file
+
+const EligibilityChecker = () => {
+  const [intervalID, setIntervalID] = useState(null);
+
+  const checkEligibility = () => {
+    const img = `
+      <div class='dialog-box' id='dialog'>
+        <p id='heading'>Checking Eligibility...</p>
+        <div>
+          <img src='/IjarahPortal/spinnerNew.gif' style='width:351px; margin-top:-28px; height:332px;'/>
+          <div style='position:relative'>
+            <nav class='navmenu'>
+              <ul id='checks'>
+                <li><a href='#'>Credit Check</a></li>
+                <li><a href='#'>Employment Verification</a></li>
+                <li><a href='#'>Income Verification</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const box = bootbox.dialog({
+      message: img,
+      closeButton: true,
+      size: 'small'
+    });
+
+    let currentIndex = 0;
+    const clickon = () => {
+      if (currentIndex >= 3) {
+        clearInterval(intervalID);
+        box.modal('hide');
+        showFinalEligibilitySection();
+      }
+      if (currentIndex < 3) {
+        const liElement = document.querySelectorAll('.navmenu ul li a')[currentIndex];
+        liElement.classList.add('active');
+      }
+      currentIndex++;
+    };
+
+    const interval = setInterval(clickon, 2000);
+    setIntervalID(interval);
+  };
+
+  const showFinalEligibilitySection = () => {
+    alert('Eligibility check completed!');
+  };
+
+  return (
+    <div>
+      <button onClick={checkEligibility}>Check Eligibility</button>
+    </div>
+  );
+};
+
+export default EligibilityChecker;

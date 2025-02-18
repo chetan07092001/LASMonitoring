@@ -1,0 +1,57 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  ul {
+    list-style-type: none;
+  }
+  
+  body {
+    background: #fff;
+    height: 100vh;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  
+  .loader-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .loader-image {
+    height: 200px;
+    width: 200px;
+    margin-right: 20px;
+  }
+  
+  .steps-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .loader-title {
+    font-weight: bolder;
+    font-size: larger;
+    color: #00006b;
+    margin-bottom: 10px;
+  }
+  
+  .steps-list {
+    padding: 0;
+  }
+  
+  .steps-list li {
+    padding: 5px 0;
+    font-size: 1rem;
+    color: #05293d;
+  }
+  
+  .steps-list li.active {
+    font-weight: 700;
+    color: #00006b;
+  }
+  
