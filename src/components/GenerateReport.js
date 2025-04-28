@@ -91,7 +91,7 @@ export default function ExcelToDataGrid() {
           setExcelData(formattedData);
           setLoading(false);
           sendExcelDataToLAS(formattedData);
-          //sendExcelDataToLMS(formattedData);
+          sendExcelDataToLMS(formattedData);
           
         }, 15000);
       };
