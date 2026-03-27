@@ -18,8 +18,8 @@ export const sendEmail = (mailSubject, mailBody) => {
   const body = {
     mailBody: mailBody,
 
-    mailTo: 'ibpscheck@gmail.com',
-   // mailTo: 'chetankjadhav2001@gmail.com',
+    mailTo: 'sangal.rajesh837@gmail.com',
+   //mailTo: 'chetankjadhav2001@gmail.com',
     mailSubject: mailSubject
   };
 
