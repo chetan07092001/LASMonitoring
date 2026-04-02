@@ -18,6 +18,7 @@ import GenerateReport from './components/GenerateReport';
 import TotalCaseTable from './components/TotalCaseTable';
 import CustomerPage from './CustomerPage';
 import { useState } from 'react';
+import SecurityDashboard from './components/securityDashboard';
 
 function App() {
   
@@ -53,6 +54,8 @@ function AuthenticatedRoutes() {
               <Route path="/portfolioHealth" element={<FundDeposited />} />
               <Route path="/dashboard/:id" element={<OtherCard />} />
               <Route path="/totalCaseTable" element={<TotalCaseTable/>} />
+              {/* <Route path="/dashboard/securityPortfolio" element={<SecurityDashboard/>} /> */}
+              <Route path="/securityPortfolio" element={<SecurityDashboard/>} />
               
             </Routes>
           </Grid>

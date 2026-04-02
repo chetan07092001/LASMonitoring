@@ -140,93 +140,170 @@ const FundDeposited = () => {
 },[params.id])
   return (
     <Grid container spacing={2} bgcolor={'#f9f9f9'} pr={2}>
-            <Grid item xs={6} md={3} className='datatiles'>
-                    <Box >
-                        <CardContent>
-                            <Stack direction={'column'} alignItems={'center'}>
-                            <Typography variant="h5" component="h5" fontFamily={'Epilogue'} fontWeight={'900'} textAlign={'center'} mb={2} mt={2}>Quick Actions</Typography>
-                                <SearchBar/>
-                            </Stack>
-                        </CardContent>
-                    </Box>
-         </Grid>
-          <Grid item xs={6} md={3} className='datatiles'>
-                <Card variant="outlined">
+
+            {/* Quick Actions */}
+            <Grid item xs={6} md={3}>
+                <Card elevation={0} sx={{ border: '1px solid #e4edf8', borderRadius: 2, height: '100%' }}>
                     <CardContent>
-                        <Stack direction={'column'} alignItems={'center'}>
-                            <Stack direction={'row'} gap={2}>
-                            <GoAlert size={25} color="red"/>
-                            <Typography variant="subtitle1" component="subtitle1" fontFamily={'Epilogue'} fontWeight={'700'}>Margin Below 25</Typography>
-                            </Stack>
-                            <AvatarGroup max={5}>
+                        <Stack direction="row" alignItems="center" sx={{ borderBottom: '1px solid #e4edf8', mb: 2, pb: 1 }}>
+                            <Typography sx={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 15, color: '#1a3a5c' }}>
+                                Quick Actions
+                            </Typography>
+                        </Stack>
+                        <SearchBar />
+                    </CardContent>
+                </Card>
+            </Grid>
+
+            {/* Margin Below 25% — Critical */}
+            <Grid item xs={6} md={3}>
+                <Card elevation={0} sx={{ border: '1px solid #e4edf8', borderRadius: 2, borderTop: '3px solid #C0392B' }}>
+                    <CardContent sx={{ pb: '12px !important' }}>
+                        <Stack direction="row" alignItems="center" gap={1} sx={{ borderBottom: '1px solid #e4edf8', pb: 1, mb: 1.5 }}>
+                            <Box sx={{ backgroundColor: '#fff0ee', borderRadius: '8px', p: '5px', display: 'flex', alignItems: 'center' }}>
+                                <GoAlert size={15} color="#C0392B" />
+                            </Box>
+                            <Typography sx={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 13, color: '#1a3a5c' }}>
+                                Margin Below 25%
+                            </Typography>
+                        </Stack>
+                        <Box sx={{ display: 'flex', justifyContent: 'center', my: 1.5 }}>
+                            <AvatarGroup max={5} sx={{ '& .MuiAvatar-root': { width: 32, height: 32, fontSize: 13 } }}>
                                 <Avatar alt="Travis Howard" src={p2} />
                                 <Avatar alt="Cindy Baker" src={p3} />
                                 <Avatar alt="Agnes Walker" src={p4} />
                                 <Avatar alt="Trevor Henderson" src={p5} />
                                 <Avatar alt="Trevor Henderson" src={p6} />
-                                </AvatarGroup>
-                            <CiMail size={40} color="blue" onClick={handleoneSendEmail} />
-                            <Typography variant="subtitle1" component="subtitle1" fontFamily={'Inter'} fontSize={'12px'}>Send Email For Sell</Typography>
+                            </AvatarGroup>
+                        </Box>
+                        <Stack
+                            direction="row" alignItems="center" justifyContent="center" gap={0.75}
+                            onClick={handleoneSendEmail}
+                            sx={{ pt: 1, borderTop: '1px solid #f0f4fa', cursor: 'pointer', '&:hover .action-label': { color: '#1a4a82' }, '&:hover .action-icon': { color: '#1a4a82' } }}
+                        >
+                            <CiMail size={16} className="action-icon" color="#2563a8" />
+                            <Typography className="action-label" sx={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, fontWeight: 600, color: '#2563a8' }}>
+                                Send Email for Sell
+                            </Typography>
                         </Stack>
                     </CardContent>
                 </Card>
             </Grid>
-          <Grid item xs={6} md={3} className='datatiles'>
-                <Card variant="outlined">
-                    <CardContent>
-                        <Stack direction={'column'} alignItems={'center'}>
-                            <Stack direction={'row'} gap={2}>
-                            <FaRegThumbsDown size={25} color="red"/>
-                            <Typography variant="subtitle1" component="subtitle1" fontFamily={'Epilogue'} fontWeight={'700'}>Margin Below 26-40%</Typography>
-                            </Stack>
-                            <AvatarGroup max={4}>
+
+            {/* Margin 26–40% — Warning */}
+            <Grid item xs={6} md={3}>
+                <Card elevation={0} sx={{ border: '1px solid #e4edf8', borderRadius: 2, borderTop: '3px solid #E8A838' }}>
+                    <CardContent sx={{ pb: '12px !important' }}>
+                        <Stack direction="row" alignItems="center" gap={1} sx={{ borderBottom: '1px solid #e4edf8', pb: 1, mb: 1.5 }}>
+                            <Box sx={{ backgroundColor: '#fff8e6', borderRadius: '8px', p: '5px', display: 'flex', alignItems: 'center' }}>
+                                <FaRegThumbsDown size={15} color="#E8A838" />
+                            </Box>
+                            <Typography sx={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 13, color: '#1a3a5c' }}>
+                                Margin 26–40%
+                            </Typography>
+                        </Stack>
+                        <Box sx={{ display: 'flex', justifyContent: 'center', my: 1.5 }}>
+                            <AvatarGroup max={4} sx={{ '& .MuiAvatar-root': { width: 32, height: 32, fontSize: 13 } }}>
                                 <Avatar alt="Travis Howard" src={p7} />
                                 <Avatar alt="Cindy Baker" src={p8} />
                                 <Avatar alt="Agnes Walker" src={p9} />
-                                </AvatarGroup>
-                            <CiMail size={40} color="blue" onClick={handletwoSendEmail}  />
-                            <Typography variant="subtitle1" component="subtitle1" fontFamily={'Inter'} fontSize={'12px'}>Send Email For 3 day Intimation</Typography>
+                            </AvatarGroup>
+                        </Box>
+                        <Stack
+                            direction="row" alignItems="center" justifyContent="center" gap={0.75}
+                            onClick={handletwoSendEmail}
+                            sx={{ pt: 1, borderTop: '1px solid #f0f4fa', cursor: 'pointer', '&:hover .action-label': { color: '#1a4a82' }, '&:hover .action-icon': { color: '#1a4a82' } }}
+                        >
+                            <CiMail size={16} className="action-icon" color="#2563a8" />
+                            <Typography className="action-label" sx={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, fontWeight: 600, color: '#2563a8' }}>
+                                Send 3-Day Intimation
+                            </Typography>
                         </Stack>
                     </CardContent>
                 </Card>
             </Grid>
-          <Grid item xs={6} md={3} className='datatiles'>
-                <Card variant="outlined">
-                    <CardContent>
-                        <Stack direction={'column'} alignItems={'center'}>
-                            <Stack direction={'row'} gap={2}>
-                            <AiOutlineAlert size={25} color="red"/>
-                            <Typography variant="subtitle1" component="subtitle1" fontFamily={'Epilogue'} fontWeight={'700'}>Margin Below 41-50%</Typography>
-                            </Stack>
-                            <AvatarGroup max={4}>
+
+            {/* Margin 41–50% — Notice */}
+            <Grid item xs={6} md={3}>
+                <Card elevation={0} sx={{ border: '1px solid #e4edf8', borderRadius: 2, borderTop: '3px solid #2563a8' }}>
+                    <CardContent sx={{ pb: '12px !important' }}>
+                        <Stack direction="row" alignItems="center" gap={1} sx={{ borderBottom: '1px solid #e4edf8', pb: 1, mb: 1.5 }}>
+                            <Box sx={{ backgroundColor: '#eaf1fb', borderRadius: '8px', p: '5px', display: 'flex', alignItems: 'center' }}>
+                                <AiOutlineAlert size={15} color="#2563a8" />
+                            </Box>
+                            <Typography sx={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 13, color: '#1a3a5c' }}>
+                                Margin 41–50%
+                            </Typography>
+                        </Stack>
+                        <Box sx={{ display: 'flex', justifyContent: 'center', my: 1.5 }}>
+                            <AvatarGroup max={4} sx={{ '& .MuiAvatar-root': { width: 32, height: 32, fontSize: 13 } }}>
                                 <Avatar alt="Travis Howard" src={p10} />
                                 <Avatar alt="Cindy Baker" src={p11} />
                                 <Avatar alt="Agnes Walker" src={p12} />
                                 <Avatar alt="Trevor Henderson" src={p3} />
-                                </AvatarGroup>
-                            <CiMail size={40} color="blue" onClick={handlethreeSendEmail} />
-                            <Typography variant="subtitle1" component="subtitle1" fontFamily={'Inter'} fontSize={'12px'}>Send Email For 5 day Intimation</Typography>
+                            </AvatarGroup>
+                        </Box>
+                        <Stack
+                            direction="row" alignItems="center" justifyContent="center" gap={0.75}
+                            onClick={handlethreeSendEmail}
+                            sx={{ pt: 1, borderTop: '1px solid #f0f4fa', cursor: 'pointer', '&:hover .action-label': { color: '#1a4a82' }, '&:hover .action-icon': { color: '#1a4a82' } }}
+                        >
+                            <CiMail size={16} className="action-icon" color="#2563a8" />
+                            <Typography className="action-label" sx={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, fontWeight: 600, color: '#2563a8' }}>
+                                Send 5-Day Intimation
+                            </Typography>
                         </Stack>
                     </CardContent>
                 </Card>
             </Grid>
-            <Grid item xs={12} md={3} >
-                <Card >
+            <Grid item xs={12} md={3}>
+                <Card elevation={0} sx={{ border: '1px solid #e4edf8', borderRadius: 2 }}>
                     <CardContent>
-                    <ToggleButtonGroup
-                        color="primary"
-                        value={alignment}
-                        exclusive
-                        onChange={handleChange}
-                        aria-label="Platform"
-                        size='small'
-                        sx={{marginLeft:'35px',marginBottom:'10px'}}
-                        
-                        >
-                        <ToggleButton value="b">Percentage</ToggleButton>
-                        <ToggleButton value="l">Amount</ToggleButton>
-                        </ToggleButtonGroup>
-                        {alignment=='b'?<BreachedChart handleClick={handleClick}/>:<LoanChart handleClick={handleClick}/>}
+                        <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ borderBottom: '1px solid #e4edf8', mb: 1.5, pb: 1 }}>
+                            <Typography sx={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 15, color: '#1a3a5c' }}>
+                                Margin Breakup
+                            </Typography>
+                            <ToggleButtonGroup
+                                value={alignment}
+                                exclusive
+                                onChange={handleChange}
+                                aria-label="View type"
+                                size="small"
+                                sx={{
+                                    backgroundColor: '#f0f4fa',
+                                    borderRadius: '8px',
+                                    p: '3px',
+                                    gap: '2px',
+                                    '& .MuiToggleButtonGroup-grouped': {
+                                        border: '0 !important',
+                                        borderRadius: '6px !important',
+                                    },
+                                    '& .MuiToggleButton-root': {
+                                        fontFamily: "'DM Sans', sans-serif",
+                                        fontSize: 11,
+                                        fontWeight: 600,
+                                        textTransform: 'none',
+                                        px: 1.5,
+                                        py: 0.4,
+                                        color: '#6b7d96',
+                                        '&.Mui-selected': {
+                                            // color: '#fff',
+                                            backgroundColor: '#2563a8',
+                                            boxShadow: '0 1px 4px rgba(37,99,168,0.18)',
+                                            '&:hover': { backgroundColor: '#1a4a82' },
+                                        },
+                                        '&:hover': { backgroundColor: '#e2e9f4' },
+                                    },
+                                }}
+                            >
+                                <ToggleButton value="b">Percentage</ToggleButton>
+                                <ToggleButton value="l">Amount</ToggleButton>
+                            </ToggleButtonGroup>
+                        </Stack>
+                        {alignment === 'b'
+                            ? <BreachedChart handleClick={handleClick} />
+                            : <LoanChart handleClick={handleClick} />
+                        }
                     </CardContent>
                 </Card>
             </Grid>

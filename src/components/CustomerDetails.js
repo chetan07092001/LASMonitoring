@@ -95,32 +95,32 @@ function CustomerDetails({ data }) {
               <div style={{ marginTop: '16px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '21px' }}>
                   <InfoOutlinedIcon sx={{ color: '#0000FF', marginRight: 1 }} /> {/* Blue color */}
-                  <div  sx={{ color: '#6E7787',fontFamily: 'Inter, sans-serif'}}>CIF</div>
+                  <div  sx={{ color: '#6E7787',fontFamily: "'DM Sans', sans-serif"}}>CIF</div>
                   <div style={{ marginLeft: 'auto',color: '#6E7787' }}>{data[0].cif}</div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '21px' }}>
                   <InfoOutlinedIcon sx={{ color: '#0000FF', marginRight: 1 }} /> {/* Blue color */}
-                  <div sx={{ color: '#6E7787',fontFamily: 'Inter, sans-serif'}}>Loan Account Number</div>
+                  <div sx={{ color: '#6E7787',fontFamily: "'DM Sans', sans-serif"}}>Loan Account Number</div>
                   <div style={{ marginLeft: 'auto',color: '#6E7787' }}>{data[0].lan}</div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '21px' }}>
                   <HomeOutlinedIcon sx={{ color: '#0000FF', marginRight: 1 }} /> {/* Blue color */}
-                  <div sx={{ color: '#6E7787',fontFamily: 'Inter, sans-serif'}}>Branch</div>
+                  <div sx={{ color: '#6E7787',fontFamily: "'DM Sans', sans-serif"}}>Branch</div>
                   <div style={{ marginLeft: 'auto',color: '#6E7787' }}>{data[0].branch}</div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '21px' }}>
                   <PhoneOutlinedIcon sx={{ color: '#0000FF', marginRight: 1 }} /> {/* Blue color */}
-                  <div sx={{ color: '#6E7787',fontFamily: 'Inter, sans-serif'}}>Phone number</div>
+                  <div sx={{ color: '#6E7787',fontFamily: "'DM Sans', sans-serif"}}>Phone number</div>
                   <div style={{ marginLeft: 'auto',color: '#379AE6' }}>{data[0].phone}</div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '21px' }}>
                   <AlternateEmailOutlinedIcon sx={{ color: '#0000FF', marginRight: 1 }} /> {/* Blue color */}
-                  <div sx={{ color: '#6E7787',fontFamily: 'Inter, sans-serif'}}>Email</div>
+                  <div sx={{ color: '#6E7787',fontFamily: "'DM Sans', sans-serif"}}>Email</div>
                   <div style={{ marginLeft: 'auto',color: '#379AE6' }}>{data[0].email}</div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '21px'}}>
                   <LocationOnOutlinedIcon sx={{ color: '#0000FF', marginRight: 1 }} /> {/* Blue color */}
-                  <div sx={{ color: '#6E7787',fontFamily: 'Inter, sans-serif'}}>Address</div>
+                  <div sx={{ color: '#6E7787',fontFamily: "'DM Sans', sans-serif"}}>Address</div>
                   <div style={{ marginLeft: 'auto',color: '#6E7787' }}>{data[0].address}</div>
                 </div>
               </div>

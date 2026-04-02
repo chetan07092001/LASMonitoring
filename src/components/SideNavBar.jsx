@@ -2,89 +2,83 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import avatar from '../assests/avtar.png'
-import customer from '../assests/sidebaricon/customer.png'
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
-import ListTwoToneIcon from '@mui/icons-material/ListTwoTone';
+import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
-import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
+import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
+import SecurityOutlinedIcon from '@mui/icons-material/SecurityOutlined';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import HomeIcon from '@mui/icons-material/Home';
+import '../Styles/sidenav.css';
+
+const navItems = [
+  { label: 'Dashboard',        icon: DashboardOutlinedIcon,    to: '/dashboard' },
+  { label: 'Customers',        icon: PeopleOutlinedIcon,        to: '/customer' },
+  { label: 'Settings',         icon: SettingsOutlinedIcon,      to: '/settings' },
+  { label: 'Generate Report',  icon: DescriptionOutlinedIcon,   to: '/genratereport' },
+  { label: 'New Customers',    icon: PersonAddOutlinedIcon,     to: '/newCustomers/newDisbursal' },
+  { label: 'Security Dashboard', icon: SecurityOutlinedIcon,   to: '/securityPortfolio' },
+];
+
 const NavBar = () => {
-    const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-  const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
-  };
   return (
-    <nav >
-        <div className="userdetail">
-            <img src={avatar} alt="avtar" width={'100px'} height={'100px'}/>
-            <label htmlFor="username" id='username' >Neha Sharma</label>
-            <p className="role">Manager</p>
+    <nav style={{position: "fixed"}}>
+      {/* User profile section */}
+      <div className="userdetail">
+        <div className="avatarRing">
+          <img src={avatar} alt="avatar" width={64} height={64} style={{ borderRadius: '50%', objectFit: 'cover' }} />
         </div>
-        <div className="navbuttons">
-            <Link to={'/dashboard'}  style={{ textDecoration: 'none',color:'black' }}>
-                    <ListItemButton
-                        selected={selectedIndex === 0}
-                        onClick={(event) => handleListItemClick(event, 0)}
-                        >
-                        <ListItemIcon>
-                            <DashboardOutlinedIcon sx={selectedIndex===0?{color:'white' }:''}/>
-                        </ListItemIcon>
-                        <ListItemText primary="Dashboard"  sx={{marginLeft:'-20px'}}/>
-                    </ListItemButton>
-            </Link>
-            <Link to={'/customer'} style={{ textDecoration: 'none',color:'black' }}>
-            <ListItemButton
-                        selected={selectedIndex === 1}
-                        onClick={(event) => handleListItemClick(event, 1)}
-                        >
-                        <ListItemIcon>
-                            <ListTwoToneIcon sx={selectedIndex===1?{color:'white' }:''}/>
-                        </ListItemIcon>
-                        <ListItemText primary="Customers" sx={{marginLeft:'-20px'}}/>
-                    </ListItemButton>
-            </Link>
-            
-            <Link to={'/settings'} style={{ textDecoration: 'none',color:'black' }}>
-            <ListItemButton
-                        selected={selectedIndex === 2}
-                        onClick={(event) => handleListItemClick(event, 2)}
-                        >
-                        <ListItemIcon>
-                            <SettingsOutlinedIcon sx={selectedIndex===2?{color:'white' }:''}/>
-                        </ListItemIcon>
-                        <ListItemText primary="Settings" sx={{marginLeft:'-20px'}}/>
-                    </ListItemButton>
-            </Link>
-            <Link to={'/genratereport'} style={{ textDecoration: 'none',color:'black' }}>
-            <ListItemButton
-                        selected={selectedIndex === 3}
-                        onClick={(event) => handleListItemClick(event, 3)}
-                        >
-                        <ListItemIcon>
-                            <DescriptionOutlinedIcon sx={selectedIndex===3?{color:'white' }:''}/>
-                        </ListItemIcon>
-                        <ListItemText primary="Generate Report" sx={{marginLeft:'-20px'}}/>
-                    </ListItemButton>
-            </Link>
-            <Link to={'/newCustomers/newDisbursal'} style={{ textDecoration: 'none',color:'black' }} >
-                    <ListItemButton
-                        selected={selectedIndex === 4}
-                        onClick={(event) => handleListItemClick(event, 4)}
-                        >
-                        <ListItemIcon>
-                            <ListTwoToneIcon sx={selectedIndex===4?{color:'white' }:''}/>
-                        </ListItemIcon>
-                        <ListItemText primary="New Customers" sx={{marginLeft:'-20px'}}/>
-                    </ListItemButton>
-            </Link>
-        </div>
-    </nav>
-  )
-}
+        <label htmlFor="username" id="username">Annie Smith</label>
+        <p className="role">Manager</p>
+      </div>
 
-export default NavBar
+      {/* Divider */}
+      <div style={{ height: '1px', background: 'rgba(255,255,255,0.1)', margin: '0 16px 16px' }} />
+
+      {/* Nav items */}
+      <div className="navbuttons">
+        {navItems.map(({ label, icon: Icon, to }, index) => (
+          <Link key={label} to={to} style={{ textDecoration: 'none' }}>
+            <ListItemButton
+              selected={selectedIndex === index}
+              onClick={() => setSelectedIndex(index)}
+              sx={{
+                borderRadius: '10px',
+                mx: 1,
+                mb: 0.5,
+                py: 1,
+                '&.Mui-selected': {
+                  background: 'rgba(255,255,255,0.15) !important',
+                  '&:hover': { background: 'rgba(255,255,255,0.2) !important' },
+                },
+                '&:hover': { background: 'rgba(255,255,255,0.08)' },
+              }}
+            >
+              <ListItemIcon sx={{ minWidth: 38 }}>
+                <Icon sx={{ fontSize: 20, color: selectedIndex === index ? 'white' : 'rgba(255,255,255,0.55)' }} />
+              </ListItemIcon>
+              <ListItemText
+                primary={label}
+                primaryTypographyProps={{
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontSize: '13px',
+                  fontWeight: selectedIndex === index ? 600 : 400,
+                  color: selectedIndex === index ? 'white' : 'rgba(255,255,255,0.65)',
+                }}
+              />
+              {selectedIndex === index && (
+                <div style={{ width: 3, height: 20, borderRadius: 2, background: 'rgba(255,255,255,0.7)' }} />
+              )}
+            </ListItemButton>
+          </Link>
+        ))}
+      </div>
+    </nav>
+  );
+};
+
+export default NavBar;

@@ -222,51 +222,188 @@ const OtherCard = () => {
   };
 
   return (
-    <Grid container spacing={2} bgcolor={'#f9f9f9'} pr={2}>
+    <Grid container spacing={2} bgcolor={'#EEF2F7'} pr={2} pb={3}>
       <MailingApi />
-      <Grid item xs={4} md={3} className='datatiles'>
-        <Box>
-          <Stack direction={'column'} alignItems={'center'}>
-            <Typography variant="h4" component="h4" fontFamily={'Epilogue'} fontWeight={'900'} textAlign={'center'} pt={5}>Quick<br />Actions</Typography>
-          </Stack>
-        </Box>
+
+      {/* Page header bar */}
+      <Grid item xs={12}>
+        <div style={{
+          background: 'linear-gradient(90deg, #0d2d54 0%, #1a4a82 100%)',
+          borderRadius: '16px',
+          padding: '16px 24px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          boxShadow: '0 4px 18px rgba(13,45,84,0.18)',
+        }}>
+          <div>
+            <Typography
+              fontFamily={"'DM Sans', sans-serif"}
+              fontSize={'20px'}
+              color={'white'}
+              lineHeight={1.2}
+            >
+              {cardLabel || 'Records'}
+            </Typography>
+            <Typography
+              fontFamily={"'DM Sans', sans-serif"}
+              fontSize={'12px'}
+              color={'rgba(255,255,255,0.55)'}
+              mt={0.3}
+            >
+              Loan Against Securities — Detail View
+            </Typography>
+          </div>
+          <Button
+            variant="outlined"
+            component={Link}
+            to="/dashboard"
+            style={{
+              color: 'rgba(255,255,255,0.85)',
+              border: '1px solid rgba(255,255,255,0.3)',
+              borderRadius: '8px',
+              fontFamily: "'DM Sans', sans-serif",
+              fontWeight: 600,
+              fontSize: '13px',
+              textTransform: 'none',
+              padding: '7px 20px',
+              background: 'rgba(255,255,255,0.1)',
+            }}
+          >
+            ← Back
+          </Button>
+        </div>
       </Grid>
-      <Grid item xs={4} md={6}>
-        <Box alignItems={'center'} mt={8}>
-          <SearchBar />
-        </Box>
-      </Grid>
-      <Grid item xs={4} md={3} className='datatiles'>
-        <Card variant="outlined">
-          <CardContent>
-            <Stack direction={'column'} alignItems={'center'}>
-              <Stack direction={'row'} gap={2}>
-                <Typography variant="subtitle1" component="subtitle1" fontFamily={'Epilogue'} fontWeight={'700'}>{cardLabel}</Typography>
-              </Stack>
-              <AvatarGroup max={4}>
+
+      {/* Quick Actions + Search + Action Card row */}
+      <Grid item xs={12} md={3}>
+        <Card style={{
+          borderRadius: '16px',
+          boxShadow: '0 2px 12px rgba(0,0,0,0.07)',
+          border: '1px solid #e4edf8',
+          height: '100%',
+        }}>
+          <CardContent style={{ padding: '24px 20px' }}>
+            <Typography
+              fontFamily={"'DM Sans', sans-serif"}
+              fontSize={'22px'}
+              color={'#1a3a5c'}
+              mb={1}
+              lineHeight={1.3}
+            >
+              Quick Actions
+            </Typography>
+            <Typography
+              fontFamily={"'DM Sans', sans-serif"}
+              fontSize={'12px'}
+              color={'#6b7d96'}
+              mb={2.5}
+            >
+              Select rows in the table below, then trigger a bulk action.
+            </Typography>
+
+            {/* Divider */}
+            <div style={{ height: 1, background: '#e4edf8', marginBottom: 20 }} />
+
+            {/* Card label + avatars */}
+            <div style={{
+              background: '#f5f8fc',
+              borderRadius: '10px',
+              border: '1px solid #e4edf8',
+              padding: '14px 16px',
+              marginBottom: 16,
+            }}>
+              <Typography
+                fontFamily={"'DM Sans', sans-serif"}
+                fontSize={'11px'}
+                fontWeight={600}
+                color={'#9aabb8'}
+                letterSpacing={'0.5px'}
+                mb={1}
+                style={{ textTransform: 'uppercase' }}
+              >
+                Category
+              </Typography>
+              <Typography
+                fontFamily={"'DM Sans', sans-serif"}
+                fontSize={'14px'}
+                fontWeight={700}
+                color={'#1a3a5c'}
+                mb={1.5}
+              >
+                {cardLabel}
+              </Typography>
+              <AvatarGroup max={4} sx={{ justifyContent: 'flex-start', '& .MuiAvatar-root': { width: 28, height: 28, fontSize: 11, border: '2px solid #fff' } }}>
                 <Avatar alt="Travis Howard" src={p2} />
                 <Avatar alt="Cindy Baker" src={p3} />
                 <Avatar alt="Agnes Walker" src={p4} />
                 <Avatar alt="Trevor Henderson" src={p5} />
               </AvatarGroup>
-              <CiMail size={40} color="blue" onClick={handleSendEmail} style={{ cursor: 'pointer' }} />
-              <Typography variant="subtitle1" component="subtitle1" fontFamily={'Inter'} fontSize={'12px'}>{sendLabel}</Typography>
-            </Stack>
+            </div>
+
+            {/* Send email button */}
+            <button
+              onClick={handleSendEmail}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 8,
+                width: '100%',
+                background: 'linear-gradient(135deg, #1a4a82 0%, #2563a8 100%)',
+                color: 'white',
+                border: 'none',
+                borderRadius: '8px',
+                padding: '11px 16px',
+                fontFamily: "'DM Sans', sans-serif",
+                fontWeight: 600,
+                fontSize: '13px',
+                cursor: 'pointer',
+                boxShadow: '0 2px 8px rgba(37,99,168,0.2)',
+              }}
+            >
+              <CiMail size={17} />
+              {sendLabel || 'Send Email'}
+            </button>
           </CardContent>
         </Card>
       </Grid>
-      <Grid item xs={12} md={12}>
-        <Card>
-          <CardContent>
-            <FundTable tabledata={data} updateRowSelectedData={updateRowSelectedData}/>
+
+      <Grid item xs={12} md={9}>
+        {/* Search bar */}
+        <Card style={{
+          borderRadius: '16px',
+          boxShadow: '0 2px 12px rgba(0,0,0,0.07)',
+          border: '1px solid #e4edf8',
+          marginBottom: 16,
+        }}>
+          <CardContent style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 12 }}>
+            <Typography
+              fontFamily={"'DM Sans', sans-serif"}
+              fontSize={'13px'}
+              fontWeight={600}
+              color={'#1a3a5c'}
+              style={{ whiteSpace: 'nowrap' }}
+            >
+              Search Records
+            </Typography>
+            <div style={{ flex: 1 }}>
+              <SearchBar />
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Fund table */}
+        <Card style={{
+          borderRadius: '16px',
+          boxShadow: '0 2px 12px rgba(0,0,0,0.07)',
+          border: '1px solid #e4edf8',
+        }}>
+          <CardContent style={{ padding: '0' }}>
+            <FundTable tabledata={data} updateRowSelectedData={updateRowSelectedData} />
           </CardContent>
         </Card>
       </Grid>
-      <Grid item xs={11} md={11}></Grid>
-      <Grid item xs={1} md={1}>
-        <Button variant="contained" color="primary" component={Link} to="/dashboard">Back</Button>
-      </Grid>
-      <Grid item xs={12} md={12}></Grid>
     </Grid>
   );
 };
