@@ -1,57 +1,89 @@
 import React from 'react';
-import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-const LoanChart = ({handleClick}) => {
+const LoanChart = ({ handleClick }) => {
     const data = [
-        {
-          name: 'Below 3 Lakh',
-          value: 50,
-          "fill": "#4B7BEC"
-        },{
-            name: 'Between 3-5 Lakh',
-            value: 25,
-            "fill": "#FAB740"
-          },
-          {
-            name: 'Above 5 Lakh',
-            value: 35,
-            "fill": "#F42200"
-          }]
+        { name: 'Below 3 Lakh',     value: 50, fill: "#2563a8" },
+        { name: 'Between 3-5 Lakh', value: 25, fill: "#E8A838" },
+        { name: 'Above 5 Lakh',     value: 35, fill: "#C0392B" },
+    ];
+
     return (
         <>
-      <h3 style={{fontFamily:'Epilogue', fontWeight:'700',textAlign:'center'}}>Loan Amount</h3>
-      <div style={{position:'relative'}}>
-      <div style={{minHeight: 400}}>
-        <ResponsiveContainer height={320} style={{marginLeft:'-20px'}}>
-          <BarChart
-            data={data}
-          >
-            <CartesianGrid stroke="3 3" />
-            <XAxis dataKey='name' tick={false} />
-            <YAxis />
-            <Tooltip />
-            {/* <Legend  layout="vertical" verticalAlign="bottom" align="right" payload={ [{ value:'Shares' , type: 'circle', color:"#5BC0DE" },{ value:'Mutual Funds' , type: 'circle', color: "#FFD700"},{ value:'Mutual Funds' , type: 'circle', color: "#FFD700"}]} /> */}
-            <Bar dataKey="value" barSize={20}  onClick={handleClick}/>
-          </BarChart>
-        </ResponsiveContainer>
-        </div>
-        <div style={{position:'absolute',bottom:'-10px',width:'100%'}} >
-                <div>
-                    <ul>
-                        {data.map(item => (
-                            <li style={{color:item.fill,margin:'10px'}} className="legend-item">
-                                <div style={{display:'flex',justifyContent:'space-between'}}>
-                                    <span>{item.name}</span>
-                                    <span>{item.value}</span>
-                            </div></li>
-                            
-                        ))}
-                    </ul>        
-                </div>
+            <div style={{ borderBottom: '1px solid #e4edf8', marginBottom: 12, paddingBottom: 8 }}>
+                <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 15, color: '#1a3a5c', margin: 0 }}>
+                    Loan Amount
+                </h3>
             </div>
-        </div>
-    </>
-      );
+
+            <div style={{ height: 175 }}>
+                <ResponsiveContainer>
+                    <BarChart data={data}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#e4edf8" />
+                        <XAxis
+                            dataKey="name"
+                            tick={false}
+                            axisLine={false}
+                            tickLine={false}
+                        />
+                        <YAxis
+                            tick={{ fontSize: 11, fill: '#9aabb8', fontFamily: "'DM Sans', sans-serif" }}
+                            axisLine={false}
+                            tickLine={false}
+                        />
+                        <Tooltip
+                            contentStyle={{
+                                borderRadius: 8,
+                                border: '1px solid #e4edf8',
+                                fontFamily: "'DM Sans', sans-serif",
+                                fontSize: 12,
+                                color: '#1a3a5c',
+                            }}
+                            cursor={{ fill: 'rgba(37,99,168,0.06)' }}
+                        />
+                        <Bar
+                            dataKey="value"
+                            barSize={28}
+                            activeBar={<Rectangle fill="#1a4a82" stroke="#1a4a82" />}
+                            onClick={handleClick}
+                        />
+                    </BarChart>
+                </ResponsiveContainer>
+            </div>
+
+            <ul style={{ listStyle: 'none', padding: '6px 4px 0', margin: 0 }}>
+                {data.map((item, index) => (
+                    <li
+                        key={index}
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            padding: '5px 0',
+                            borderBottom: index < data.length - 1 ? '1px solid #f0f4fa' : 'none',
+                        }}
+                    >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                            <span style={{
+                                display: 'inline-block',
+                                width: 10,
+                                height: 10,
+                                borderRadius: '50%',
+                                backgroundColor: item.fill,
+                                flexShrink: 0,
+                            }} />
+                            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: '#6b7d96' }}>
+                                {item.name}
+                            </span>
+                        </div>
+                        <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 600, color: '#1a3a5c' }}>
+                            {item.value}
+                        </span>
+                    </li>
+                ))}
+            </ul>
+        </>
+    );
 }
 
 export default LoanChart

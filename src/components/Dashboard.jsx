@@ -1,60 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
   Grid,
   Stack,
   Typography,
-  AvatarGroup,
-  Avatar,
   Box,
-} from '@mui/material';
-import one from '../assests/3.png';
-import two from '../assests/1.png';
-import three from '../assests/4.png';
-import four from '../assests/2.png';
-import p2 from '../assests/profiles/p2.png';
-import p3 from '../assests/profiles/p3.png';
-import p4 from '../assests/profiles/p4.png';
-import p5 from '../assests/profiles/p5.png';
-import p6 from '../assests/profiles/p6.png';
-import p7 from '../assests/profiles/p7.png';
-import p8 from '../assests/profiles/p8.png';
-import p9 from '../assests/profiles/p9.png';
-import p10 from '../assests/profiles/p10.png';
-import p11 from '../assests/profiles/p11.png';
-import p12 from '../assests/profiles/p12.png';
-
-import i1 from '../assests/profiles/i1.png';
-import i2 from '../assests/profiles/i2.png';
-import i3 from '../assests/profiles/i3.png';
-import { IoCalendarOutline } from 'react-icons/io5';
-import TotalCasesChart from './TotalCasesChart';
-import PortfolioChart from './PortfolioChart';
-import ChannelsChart from './ChannelsChart';
-import NewCustomerChannelsChart from './NewCustomerChannelsChart';
-import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
-import userAvtar from '../assests/profile.png';
-import upload from '../assests/upload.png';
-import calendar from '../assests/calendar.png';
-import { HiOutlineRefresh } from 'react-icons/hi';
-import filter from '../assests/filter.png';
-import refresh from '../assests/refresh-button.png';
-import edit from '../assests/edit.png';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import Loader from './SpinLoader'; // Import the Loader component
-import '../Styles/SpinLoader.css'; // Import your CSS styles
-import dayjs from 'dayjs';
+} from "@mui/material";
+import AccessAlarmsOutlinedIcon from "@mui/icons-material/AccessAlarmsOutlined";
+import ScheduleOutlinedIcon from "@mui/icons-material/ScheduleOutlined";
+import PendingActionsOutlinedIcon from "@mui/icons-material/PendingActionsOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import one from "../assests/3.png";
+import two from "../assests/1.png";
+import three from "../assests/4.png";
+import four from "../assests/2.png";
+import { IoCalendarOutline } from "react-icons/io5";
+import TotalCasesChart from "./TotalCasesChart";
+import PortfolioChart from "./PortfolioChart";
+import ChannelsChart from "./ChannelsChart";
+import NewCustomerChannelsChart from "./NewCustomerChannelsChart";
+import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
+import upload from "../assests/upload.png";
+import calendar from "../assests/calendar.png";
+import { HiOutlineRefresh } from "react-icons/hi";
+import filter from "../assests/filter.png";
+import refresh from "../assests/refresh-button.png";
+import edit from "../assests/edit.png";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import Loader from "./SpinLoader"; // Import the Loader component
+import "../Styles/SpinLoader.css"; // Import your CSS styles
+import dayjs from "dayjs";
 const steps = [
-  'Fetching Data',
-  'Updating NAV Values',
-  'Identifying Shares',
-  'Updating New Profile Values',
-  'Calculating LTV',
-  'Calculating Margin Breach',
-  'Updating Dashboard',
+  "Fetching Data",
+  "Updating NAV Values",
+  "Identifying Shares",
+  "Updating New Profile Values",
+  "Calculating LTV",
+  "Calculating Margin Breach",
+  "Updating Dashboard",
 ];
 const Dashboard = () => {
   //my changes
@@ -121,6 +107,7 @@ const Dashboard = () => {
       });
     }, 15000);
   };
+  const { portfolioHealth } = useSelector((state) => state.portfolioSummary);
   const dispatch = useDispatch();
   const dispatchAction = (
     funddata,
@@ -130,41 +117,44 @@ const Dashboard = () => {
     portfolioHealthdata,
     firstNotice,
     secondNotice,
-    marginUnderReview
+    marginUnderReview,
   ) => {
     dispatch({
-      type: 'fundAction',
+      type: "fundAction",
       payload: funddata,
     });
     dispatch({
-      type: 'collateralAction',
+      type: "collateralAction",
       payload: collateraldata,
     });
     dispatch({
-      type: 'partialSellAction',
+      type: "partialSellAction",
       payload: partialSeldata,
     });
     dispatch({
-      type: 'completedSellAction',
+      type: "completedSellAction",
       payload: completedSelldata,
     });
     dispatch({
-      type: 'portfolioHealthAction',
+      type: "portfolioHealthAction",
       payload: portfolioHealthdata,
     });
     dispatch({
-      type: 'firstNotice',
+      type: "firstNotice",
       payload: firstNotice,
     });
     dispatch({
-      type: 'secondNotice',
+      type: "secondNotice",
       payload: secondNotice,
     });
     dispatch({
-      type: 'marginUnderReview',
+      type: "marginUnderReview",
       payload: marginUnderReview,
     });
+
+    console.log("portfolioHealthdata", portfolioHealthdata);
   };
+
   useEffect(() => {
     //chetan loader
     if (loading) {
@@ -186,81 +176,81 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          'https://csgrlosdemo.newgensoftware.net:8443/lasportalbackendservices/?status=FUND_DEPOSITED'
+          "https://csgrlosdemo.newgensoftware.net:8443/lasportalbackendservices/?status=FUND_DEPOSITED",
         );
         console.log(data);
         var data1 = data;
-        data1.map((e, i) => (e['id'] = i + 1));
+        data1.map((e, i) => (e["id"] = i + 1));
       } catch (error) {
         console.log(error);
       }
       try {
         const { data } = await axios.get(
-          'https://csgrlosdemo.newgensoftware.net:8443/lasportalbackendservices/?status=ADDITIONAL_COLLATERAL_DEPOSITED'
+          "https://csgrlosdemo.newgensoftware.net:8443/lasportalbackendservices/?status=ADDITIONAL_COLLATERAL_DEPOSITED",
         );
         console.log(data);
         var data2 = data;
-        data2.map((e, i) => (e['id'] = i + 1));
+        data2.map((e, i) => (e["id"] = i + 1));
       } catch (error) {
         console.log(error);
       }
       try {
         const { data } = await axios.get(
-          'https://csgrlosdemo.newgensoftware.net:8443/lasportalbackendservices/?status=PARTIAL_SELL'
+          "https://csgrlosdemo.newgensoftware.net:8443/lasportalbackendservices/?status=PARTIAL_SELL",
         );
         console.log(data);
         var data3 = data;
-        data3.map((e, i) => (e['id'] = i + 1));
+        data3.map((e, i) => (e["id"] = i + 1));
       } catch (error) {
         console.log(error);
       }
       try {
         const { data } = await axios.get(
-          'https://csgrlosdemo.newgensoftware.net:8443/lasportalbackendservices/?status=FULL_SELL'
+          "https://csgrlosdemo.newgensoftware.net:8443/lasportalbackendservices/?status=FULL_SELL",
         );
         console.log(data);
         var data4 = data;
-        data4.map((e, i) => (e['id'] = i + 1));
+        data4.map((e, i) => (e["id"] = i + 1));
       } catch (error) {
         console.log(error);
       }
       try {
         const { data } = await axios.get(
-          'https://csgrlosdemo.newgensoftware.net:8443/lasportalbackendservices/?status=MARGIN_BREACHED'
+          "https://csgrlosdemo.newgensoftware.net:8443/lasportalbackendservices/?status=MARGIN_BREACHED",
         );
         console.log(data);
         var data5 = data;
-        data5.map((e, i) => (e['id'] = i + 1));
+        data5.map((e, i) => (e["id"] = i + 1));
       } catch (error) {
         console.log(error);
       }
       try {
         const { data } = await axios.get(
-          'https://csgrlosdemo.newgensoftware.net:8443/lasportalbackendservices/?status=FIRST_NOTICE_INITIATED'
+          "https://csgrlosdemo.newgensoftware.net:8443/lasportalbackendservices/?status=FIRST_NOTICE_INITIATED",
         );
         console.log(data);
         var data6 = data;
-        data6.map((e, i) => (e['id'] = i + 1));
+        data6.map((e, i) => (e["id"] = i + 1));
       } catch (error) {
         console.log(error);
       }
       try {
         const { data } = await axios.get(
-          'https://csgrlosdemo.newgensoftware.net:8443/lasportalbackendservices/?status=SECOND_NOTICE_INITIATED'
+          "https://csgrlosdemo.newgensoftware.net:8443/lasportalbackendservices/?status=SECOND_NOTICE_INITIATED",
         );
         console.log(data);
         var data7 = data;
-        data7.map((e, i) => (e['id'] = i + 1));
+        data7.map((e, i) => (e["id"] = i + 1));
       } catch (error) {
         console.log(error);
       }
       try {
         const { data } = await axios.get(
-          'https://csgrlosdemo.newgensoftware.net:8443/lasportalbackendservices/?status=MARGIN_UDER_REVIEW'
+          "https://csgrlosdemo.newgensoftware.net:8443/lasportalbackendservices/?status=MARGIN_UDER_REVIEW",
         );
         console.log(data);
         var data8 = data;
-        data8.map((e, i) => (e['id'] = i + 1));
+        data8.map((e, i) => (e["id"] = i + 1));
       } catch (error) {
         console.log(error);
       }
@@ -272,224 +262,297 @@ const Dashboard = () => {
 
   return (
     <>
-      <Grid container spacing={2} bgcolor={'#f9f9f9'} pr={2}>
+      <Grid container spacing={2} bgcolor={"#EEF2F7"} pr={2}>
         <Grid item xs={12} md={12}>
-          <Box>
-            <CardContent className='dashboardHeader'>
+          <Box
+            sx={{
+              background: "linear-gradient(90deg, #0d2d54 0%, #1a4a82 100%)",
+              borderRadius: "16px",
+              px: 3,
+              py: 1.5,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              boxShadow: "0 4px 18px rgba(13,45,84,0.18)",
+            }}
+          >
+            <div>
               <Typography
-                variant='h6'
-                component='h6'
-                fontFamily={'Epilogue'}
-                fontWeight={'800'}
+                fontFamily={"'DM Sans', sans-serif"}
+                fontSize={"22px"}
+                fontWeight={"400"}
+                color={"white"}
+                lineHeight={1.2}
               >
                 Dashboard
               </Typography>
-              <Stack direction={'row'} gap={[1, 2]}>
-                <button
-                  style={{
-                    padding: '5px 5px',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    width: '130px',
-                    backgroundColor: '#4B7BEC',
-                    color: 'white',
-                    border: '1px solid #4B7BEC',
-                    borderRadius: '5px',
-                  }}
-                >
-                  <IoCalendarOutline color='white' size={'22px'} />
-                  <p>{dayjs().format('MMMM DD, YYYY')}</p>
-                </button>
-                <button
-                  style={{
-                    padding: '5px 5px',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    backgroundColor: '#4B7BEC',
-                    color: 'white',
-                    border: '1px solid #4B7BEC',
-                    borderRadius: '5px',
-                  }}
-                  onClick={refreshPage}
-                >
-                  <HiOutlineRefresh color='white' size={'22px'} />
-                  {/* <img src={refresh} alt="upload" width={20} height={20} onClick={refreshPage} /> */}
-                </button>
-                <button style={{ padding: '2px 5px' }}>
-                  <img
-                    src={upload}
-                    alt='upload'
-                    width={20}
-                    height={20}
-                    onClick={() =>
-                      document.getElementById('hiddenUpload').click()
-                    }
-                  />
-                  <input type='file' name='uploadexcel' id='hiddenUpload' />
-                </button>
-                <button style={{ padding: '2px 5px' }}>
-                  <img src={filter} alt='filter' width={20} height={20} />
-                </button>
-                <button style={{ padding: '2px 5px' }}>
-                  <img src={edit} alt='edit' width={20} height={20} />
-                </button>
-              </Stack>
-            </CardContent>
+              <Typography
+                fontFamily={"'DM Sans', sans-serif"}
+                fontSize={"12px"}
+                color={"rgba(255,255,255,0.55)"}
+                letterSpacing={"0.2px"}
+              >
+                Loan Against Securities — Overview
+              </Typography>
+            </div>
+            <Stack direction={"row"} gap={1} alignItems={"center"}>
+              {/* Date pill */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 7,
+                  background: "rgba(255,255,255,0.12)",
+                  border: "1px solid rgba(255,255,255,0.18)",
+                  borderRadius: "8px",
+                  padding: "7px 14px",
+                  color: "white",
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontSize: "13px",
+                  fontWeight: 500,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                <IoCalendarOutline size={16} />
+                {dayjs().format("MMMM DD, YYYY")}
+              </div>
+
+              {/* Refresh */}
+              <button
+                title="Refresh data"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  background: "rgba(255,255,255,0.12)",
+                  border: "1px solid rgba(255,255,255,0.18)",
+                  borderRadius: "8px",
+                  padding: "8px 10px",
+                  cursor: "pointer",
+                  color: "white",
+                }}
+                onClick={refreshPage}
+              >
+                <HiOutlineRefresh color="white" size={18} />
+              </button>
+
+              {/* Upload */}
+              <button
+                title="Upload Excel"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  background: "rgba(255,255,255,0.12)",
+                  border: "1px solid rgba(255,255,255,0.18)",
+                  borderRadius: "8px",
+                  padding: "8px 10px",
+                  cursor: "pointer",
+                }}
+                onClick={() => document.getElementById("hiddenUpload").click()}
+              >
+                <img
+                  src={upload}
+                  alt="upload"
+                  width={18}
+                  height={18}
+                  style={{ filter: "brightness(0) invert(1)", opacity: 0.85 }}
+                />
+                <input
+                  type="file"
+                  name="uploadexcel"
+                  id="hiddenUpload"
+                  style={{ display: "none" }}
+                />
+              </button>
+
+              {/* Filter */}
+              <button
+                title="Filter"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  background: "rgba(255,255,255,0.12)",
+                  border: "1px solid rgba(255,255,255,0.18)",
+                  borderRadius: "8px",
+                  padding: "8px 10px",
+                  cursor: "pointer",
+                }}
+              >
+                <img
+                  src={filter}
+                  alt="filter"
+                  width={18}
+                  height={18}
+                  style={{ filter: "brightness(0) invert(1)", opacity: 0.85 }}
+                />
+              </button>
+
+              {/* Edit */}
+              <button
+                title="Edit"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  background: "rgba(255,255,255,0.12)",
+                  border: "1px solid rgba(255,255,255,0.18)",
+                  borderRadius: "8px",
+                  padding: "8px 10px",
+                  cursor: "pointer",
+                }}
+              >
+                <img
+                  src={edit}
+                  alt="edit"
+                  width={18}
+                  height={18}
+                  style={{ filter: "brightness(0) invert(1)", opacity: 0.85 }}
+                />
+              </button>
+            </Stack>
           </Box>
         </Grid>
-        <Grid item xs={6} md={3}>
-          <Link
-            to={'/dashboard/fundDeposited'}
-            style={{ textDecoration: 'none' }}
-          >
-            <Card variant='outlined'>
-              <CardContent
-                className='datatiles'
-                style={{ backgroundColor: '#F1F5FE' }}
+        {[
+          {
+            to: "/dashboard/fundDeposited",
+            icon: one,
+            label: "Fund Deposited",
+            value: cardData.fund,
+            accent: "#27ae60",
+            grad: "linear-gradient(135deg, #1a4a82 0%, #2563a8 100%)",
+          },
+          {
+            to: "/dashboard/collateral",
+            icon: two,
+            label: "Additional Collateral",
+            value: cardData.additional,
+            accent: "#E8A838",
+            grad: "linear-gradient(135deg, #0d2d54 0%, #1a4a82 100%)",
+          },
+          {
+            to: "/dashboard/partialSell",
+            icon: three,
+            label: "Partial Sell",
+            value: cardData.partial,
+            accent: "#C0392B",
+            grad: "linear-gradient(135deg, #1a4a82 0%, #2563a8 100%)",
+          },
+          {
+            to: "/dashboard/completedSell",
+            icon: four,
+            label: "Completed Sell",
+            value: cardData.completed,
+            accent: "#27ae60",
+            grad: "linear-gradient(135deg, #0d2d54 0%, #1a4a82 100%)",
+          },
+        ].map(({ to, icon, label, value, accent, grad }) => (
+          <Grid item xs={6} md={3} key={label}>
+            <Link to={to} style={{ textDecoration: "none" }}>
+              <Card
+                style={{
+                  background: grad,
+                  borderRadius: "16px",
+                  border: "none",
+                  boxShadow: "0 4px 18px rgba(13,45,84,0.22)",
+                  transition: "transform 0.15s",
+                  cursor: "pointer",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.transform = "translateY(-2px)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.transform = "translateY(0)")
+                }
               >
-                <Stack>
-                  <Stack direction={'row'} gap={2}>
-                    <img src={one} alt='' width={'40px'} height={'40px'} />
-                    <Typography
-                      variant='subtitle1'
-                      component='subtitle1'
-                      fontFamily={'Inter'}
-                      fontWeight={'700'}
-                      color={'primary'}
+                <CardContent style={{ padding: "20px 20px 16px" }}>
+                  <Stack spacing={1.5}>
+                    <Stack
+                      direction={"row"}
+                      alignItems={"center"}
+                      justifyContent={"space-between"}
                     >
-                      Fund Deposited
+                      <div
+                        style={{
+                          background: "rgba(255,255,255,0.15)",
+                          borderRadius: "10px",
+                          padding: "8px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <img
+                          src={icon}
+                          alt=""
+                          width={"24px"}
+                          height={"24px"}
+                          style={{ filter: "brightness(0) invert(1)" }}
+                        />
+                      </div>
+                      {/* <div style={{ width: 8, height: 8, borderRadius: '50%', background: accent, boxShadow: `0 0 6px ${accent}` }} /> */}
+                      <Typography
+                        fontFamily={"'DM Sans', sans-serif"}
+                        fontSize={"18px"}
+                        fontWeight={"500"}
+                        color={"rgba(255,255,255,0.75)"}
+                        letterSpacing={"0.3px"}
+                      >
+                        {label}
+                      </Typography>
+                    </Stack>
+                    <Typography
+                      fontFamily={"'DM Sans', sans-serif"}
+                      fontSize={"32px"}
+                      fontWeight={"400"}
+                      color={"white"}
+                      lineHeight={1.1}
+                    >
+                      {value}
                     </Typography>
+                    {/* <Typography
+                      fontFamily={"'DM Sans', sans-serif"}
+                      fontSize={'12px'}
+                      fontWeight={'500'}
+                      color={'rgba(255,255,255,0.75)'}
+                      letterSpacing={'0.3px'}
+                    >
+                      {label}
+                    </Typography> */}
                   </Stack>
-                  <Typography
-                    variant='h5'
-                    component='h5'
-                    align='center'
-                    fontFamily={'Inter'}
-                    fontWeight={'700'}
-                  >
-                    {cardData.fund}
-                  </Typography>
-                </Stack>
-              </CardContent>
-            </Card>
-          </Link>
-        </Grid>
-        <Grid item xs={6} md={3} className='datatiles'>
-          <Link to={'/dashboard/collateral'} style={{ textDecoration: 'none' }}>
-            <Card variant='outlined' style={{ backgroundColor: '#F1F5FE' }}>
+                </CardContent>
+              </Card>
+            </Link>
+          </Grid>
+        ))}
+        <Grid item xs={12} md={6}>
+          <Link to={"/portfolioHealth"} style={{ textDecoration: "none" }}>
+            <Card
+              style={{
+                borderRadius: "16px",
+                boxShadow: "0 2px 12px rgba(0,0,0,0.07)",
+                border: "1px solid #e4edf8",
+              }}
+            >
               <CardContent>
-                <Stack>
-                  <Stack direction={'row'} gap={2}>
-                    <img src={two} alt='' width={'40px'} height={'40px'} />
-                    <Typography
-                      variant='subtitle1'
-                      component='subtitle1'
-                      fontFamily={'Inter'}
-                      fontWeight={'700'}
-                      color={'primary'}
-                    >
-                      Additional Collateral
-                    </Typography>
-                  </Stack>
-                  <Typography
-                    variant='h5'
-                    component='h5'
-                    align='center'
-                    fontFamily={'Inter'}
-                    fontWeight={'700'}
-                  >
-                    {cardData.additional}
-                  </Typography>
-                </Stack>
-              </CardContent>
-            </Card>
-          </Link>
-        </Grid>
-        <Grid item xs={6} md={3} className='datatiles'>
-          <Link
-            to={'/dashboard/partialSell'}
-            style={{ textDecoration: 'none' }}
-          >
-            <Card variant='outlined' style={{ backgroundColor: '#F1F5FE' }}>
-              <CardContent>
-                <Stack>
-                  <Stack direction={'row'} gap={2}>
-                    <img src={three} alt='' width={'40px'} height={'40px'} />
-                    <Typography
-                      variant='subtitle1'
-                      component='subtitle1'
-                      fontFamily={'Inter'}
-                      fontWeight={'700'}
-                      color={'primary'}
-                    >
-                      Partial Sell
-                    </Typography>
-                  </Stack>
-                  <Typography
-                    variant='h5'
-                    component='h5'
-                    align='center'
-                    fontFamily={'Inter'}
-                    fontWeight={'700'}
-                  >
-                    {cardData.partial}
-                  </Typography>
-                </Stack>
-              </CardContent>
-            </Card>
-          </Link>
-        </Grid>
-        <Grid item xs={6} md={3} className='datatiles'>
-          <Link
-            to={'/dashboard/completedSell'}
-            style={{ textDecoration: 'none' }}
-          >
-            <Card variant='outlined' style={{ backgroundColor: '#F1F5FE' }}>
-              <CardContent>
-                <Stack>
-                  <Stack direction={'row'} gap={2}>
-                    <img src={four} alt='' width={'40px'} height={'40px'} />
-                    <Typography
-                      variant='subtitle1'
-                      component='subtitle1'
-                      fontFamily={'Inter'}
-                      fontWeight={'700'}
-                      color={'primary'}
-                    >
-                      Completed Sell
-                    </Typography>
-                  </Stack>
-                  <Typography
-                    variant='h5'
-                    component='h5'
-                    align='center'
-                    fontFamily={'Inter'}
-                    fontWeight={'700'}
-                  >
-                    {cardData.completed}
-                  </Typography>
-                </Stack>
+                <PortfolioChart portfoliodata={portfoliodata} portfolioHealthdata={portfolioHealth} />
               </CardContent>
             </Card>
           </Link>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Link to={'/portfolioHealth'} style={{ textDecoration: 'none' }}>
-            <Card>
-              <CardContent>
-                <PortfolioChart portfoliodata={portfoliodata} />
-              </CardContent>
-            </Card>
-          </Link>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Link to={'/totalCaseTable'} style={{ textDecoration: 'none' }}>
-            <Card>
+          <Link to={"/totalCaseTable"} style={{ textDecoration: "none" }}>
+            <Card
+              style={{
+                borderRadius: "16px",
+                boxShadow: "0 2px 12px rgba(0,0,0,0.07)",
+                border: "1px solid #e4edf8",
+              }}
+            >
               <CardContent>
                 <TotalCasesChart
-                  barSize={'30'}
+                  barSize={"30"}
                   tick={false}
                   branchdata={branchdata}
                 />
@@ -499,319 +562,535 @@ const Dashboard = () => {
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <Grid container xs={12} md={12} spacing={2}>
-            <Grid item xs={12} md={12}>
-              <Card>
-                <CardContent>
-                  <ChannelsChart channeldata={channeldata} />
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12} md={12}>
-              <Card>
-                <CardContent>
-                  <NewCustomerChannelsChart channeldata={channeldata1} />
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
+          <Stack direction={"column"} spacing={2}>
+            <Card
+              style={{
+                borderRadius: "16px",
+                boxShadow: "0 2px 12px rgba(0,0,0,0.07)",
+                border: "1px solid #e4edf8",
+              }}
+            >
+              <CardContent>
+                <ChannelsChart channeldata={channeldata} />
+              </CardContent>
+            </Card>
+            <Card
+              style={{
+                borderRadius: "16px",
+                boxShadow: "0 2px 12px rgba(0,0,0,0.07)",
+                border: "1px solid #e4edf8",
+              }}
+            >
+              <CardContent>
+                <NewCustomerChannelsChart channeldata={channeldata1} />
+              </CardContent>
+            </Card>
+          </Stack>
         </Grid>
 
         <Grid item xs={12} md={6}>
           <Grid container xs={12} md={12} spacing={2}>
+            {/* Customer 360 */}
             <Grid item xs={6}>
-              <Card>
-                <CardContent>
-                  <Stack direction={'column'}>
-                    <Typography
-                      variant='subtitle1'
-                      component='subtitle1'
-                      fontFamily={'Epilogue'}
-                      fontWeight={'500'}
-                      color={'#FF5151'}
+              <Card
+                style={{
+                  borderRadius: "16px",
+                  boxShadow: "0 2px 12px rgba(0,0,0,0.07)",
+                  border: "1px solid #e4edf8",
+                  height: "100%",
+                }}
+              >
+                <CardContent style={{ padding: "20px" }}>
+                  <Typography
+                    fontFamily={"'DM Sans', sans-serif"}
+                    fontSize={"16px"}
+                    fontWeight={"400"}
+                    color={"#1a3a5c"}
+                    mb={1.5}
+                  >
+                    Customer 360
+                  </Typography>
+                  <Stack
+                    direction={"row"}
+                    alignItems={"center"}
+                    gap={1.5}
+                    mb={1.5}
+                  >
+                    <div
+                      style={{
+                        width: 44,
+                        height: 44,
+                        borderRadius: "50%",
+                        background: "linear-gradient(135deg, #1a4a82, #2563a8)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                      }}
                     >
-                      Customer 360
-                    </Typography>
-                    <Stack direction={'row'} justifyContent={'space-between'}>
-                      <img src={userAvtar} alt='avtar' width={50} height={50} />
-                      <button
-                        style={{
-                          backgroundColor: '#fd7e14',
-                          color: 'white',
-                          border: 'none',
-                          height: '40px',
-                          borderRadius: '5px',
-                          width: '70%',
-                          marginTop: '5px',
-                          fontFamily: 'Inter',
-                          fontWeight: '600',
-                        }}
-                        onClick={() =>
-                          window.open(
-                            'https://hnbdemo.newgensoftware.net/LASMonitoring/#/customer'
-                          )
-                        }
+                      <PersonOutlineOutlinedIcon style={{ color: "white", fontSize: 26 }} />
+                    </div>
+                    <div>
+                      <Typography
+                        fontFamily={"'DM Sans', sans-serif"}
+                        fontSize={12}
+                        color={"#6b7d96"}
                       >
-                        Search Customer
-                      </button>
-                    </Stack>
+                        Search & view
+                      </Typography>
+                      <Typography
+                        fontFamily={"'DM Sans', sans-serif"}
+                        fontSize={13}
+                        fontWeight={600}
+                        color={"#1a3a5c"}
+                      >
+                        Customer Profile
+                      </Typography>
+                    </div>
                   </Stack>
+                  <button
+                    style={{
+                      background:
+                        "linear-gradient(135deg, #1a4a82 0%, #2563a8 100%)",
+                      color: "white",
+                      border: "none",
+                      height: "38px",
+                      borderRadius: "8px",
+                      width: "100%",
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontWeight: "600",
+                      fontSize: "13px",
+                      cursor: "pointer",
+                      boxShadow: "0 2px 8px rgba(37,99,168,0.2)",
+                    }}
+                    onClick={() =>
+                      window.open(
+                        "https://hnbdemo.newgensoftware.net/LASMonitoring/#/customer",
+                      )
+                    }
+                  >
+                    Search Customer
+                  </button>
                 </CardContent>
               </Card>
             </Grid>
+
+            {/* Notice badges */}
             <Grid item xs={6}>
-              <div>
-                <Stack direction={'column'} gap={1} height={'130px'}>
-                  <Link
-                    to={'/dashboard/secondNotice'}
-                    style={{ textDecoration: 'none' }}
+              <Stack direction={"column"} gap={1.5} height={"100%"}>
+                <Link
+                  to={"/dashboard/secondNotice"}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Card
+                    style={{
+                      borderRadius: "12px",
+                      border: "1px solid #fcd0cc",
+                      boxShadow: "0 2px 8px rgba(192,57,43,0.08)",
+                    }}
                   >
-                    <Card>
-                      <CardContent style={{ backgroundColor: '#FFD8D4' }}>
-                        <Stack
-                          direction={'row'}
-                          gap={2}
-                          alignItems={'center'}
-                          mt={-1}
-                          mb={-1}
+                    <CardContent
+                      style={{
+                        backgroundColor: "#fff5f4",
+                        padding: "14px 16px",
+                      }}
+                    >
+                      <Stack direction={"row"} gap={1.5} alignItems={"center"}>
+                        <div
+                          style={{
+                            width: 32,
+                            height: 32,
+                            borderRadius: "8px",
+                            background: "#C0392B",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            flexShrink: 0,
+                          }}
                         >
-                          <div
-                            className='numberCircle'
-                            style={{ background: '#FF5151' }}
+                          <span
+                            style={{
+                              color: "white",
+                              fontFamily: "'DM Sans', sans-serif",
+                              fontSize: 16,
+                              fontWeight: 700,
+                              lineHeight: 1,
+                            }}
                           >
-                            <p>2</p>
-                          </div>
+                            2
+                          </span>
+                        </div>
+                        <div>
                           <Typography
-                            variant='subtitle1'
-                            component='subtitle1'
-                            fontFamily={'Inter'}
-                            fontWeight={'400'}
-                            color={'#FF5151'}
+                            fontFamily={"'DM Sans', sans-serif"}
+                            fontSize={13}
+                            fontWeight={600}
+                            color={"#C0392B"}
                           >
                             Second Notice
                           </Typography>
-                        </Stack>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                  <Link
-                    to={'/dashboard/firstNotice'}
-                    style={{ textDecoration: 'none' }}
-                  >
-                    <Card>
-                      <CardContent style={{ backgroundColor: '#F1F5FE' }}>
-                        <Stack
-                          direction={'row'}
-                          gap={2}
-                          alignItems={'center'}
-                          mt={-1}
-                          mb={-1}
-                        >
-                          <div
-                            className='numberCircle'
-                            style={{ background: 'blue' }}
-                          >
-                            <p>1</p>
-                          </div>
                           <Typography
-                            variant='subtitle1'
-                            component='subtitle1'
-                            fontFamily={'Inter'}
-                            fontWeight={'400'}
-                            color={'#4B7BEC'}
+                            fontFamily={"'DM Sans', sans-serif"}
+                            fontSize={11}
+                            color={"#9aabb8"}
+                          >
+                            Urgent action required
+                          </Typography>
+                        </div>
+                      </Stack>
+                    </CardContent>
+                  </Card>
+                </Link>
+                <Link
+                  to={"/dashboard/firstNotice"}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Card
+                    style={{
+                      borderRadius: "12px",
+                      border: "1px solid #d0e4f7",
+                      boxShadow: "0 2px 8px rgba(37,99,168,0.07)",
+                    }}
+                  >
+                    <CardContent
+                      style={{
+                        backgroundColor: "#f0f6ff",
+                        padding: "14px 16px",
+                      }}
+                    >
+                      <Stack direction={"row"} gap={1.5} alignItems={"center"}>
+                        <div
+                          style={{
+                            width: 32,
+                            height: 32,
+                            borderRadius: "8px",
+                            background: "#2563a8",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            flexShrink: 0,
+                          }}
+                        >
+                          <span
+                            style={{
+                              color: "white",
+                              fontFamily: "'DM Sans', sans-serif",
+                              fontSize: 16,
+                              fontWeight: 700,
+                              lineHeight: 1,
+                            }}
+                          >
+                            1
+                          </span>
+                        </div>
+                        <div>
+                          <Typography
+                            fontFamily={"'DM Sans', sans-serif"}
+                            fontSize={13}
+                            fontWeight={600}
+                            color={"#2563a8"}
                           >
                             First Notice
                           </Typography>
-                        </Stack>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                </Stack>
-              </div>
+                          <Typography
+                            fontFamily={"'DM Sans', sans-serif"}
+                            fontSize={11}
+                            color={"#9aabb8"}
+                          >
+                            Follow-up pending
+                          </Typography>
+                        </div>
+                      </Stack>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </Stack>
             </Grid>
+
+            {/* Highlighted Profiles */}
             <Grid item xs={12}>
-              <Card>
-                <CardContent>
+              <Card
+                style={{
+                  borderRadius: "16px",
+                  boxShadow: "0 2px 12px rgba(0,0,0,0.07)",
+                  border: "1px solid #e4edf8",
+                }}
+              >
+                <CardContent style={{ padding: "20px" }}>
                   <Typography
-                    variant='subtitle1'
-                    component='subtitle1'
-                    fontFamily={'Epilogue'}
-                    fontWeight={'700'}
+                    fontFamily={"'DM Sans', sans-serif"}
+                    fontSize={"17px"}
+                    color={"#1a3a5c"}
+                    mb={1.5}
+                    style={{
+                      borderBottom: "1px solid #f0f4fa",
+                      paddingBottom: 10,
+                    }}
                   >
                     Highlighted Profiles
                   </Typography>
-                  <Grid container xs={12} spacing={1}>
-                    <Grid item xs={12}>
-                      <Link
-                        to={'/dashboard/secondNotice'}
-                        style={{ textDecoration: 'none' }}
+                  <Stack spacing={1.5}>
+                    {/* 3 Days Deadline */}
+                    <Link
+                      to={"/dashboard/secondNotice"}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <Card
+                        style={{
+                          borderRadius: "12px",
+                          border: "1px solid #fcd0cc",
+                          cursor: "pointer",
+                        }}
                       >
-                        <Card sx={{ border: '1px solid #4B7BEC' }}>
-                          <CardContent style={{ backgroundColor: '#F1F5FE' }}>
-                            <Stack
-                              direction={'row'}
-                              justifyContent={'space-between'}
-                              height={40}
-                            >
-                              <Stack direction={'column'} alignItems={'center'}>
-                                <div
-                                  style={{
-                                    backgroundColor: '#DE3B40',
-                                    borderRadius: '5px',
-                                    marginTop: '-12px',
-                                    alignSelf: 'start',
-                                  }}
-                                >
-                                  <Typography
-                                    pl={1}
-                                    pr={1}
-                                    fontFamily={'Inter'}
-                                    color={'white'}
-                                    fontSize={'12px'}
-                                    fontWeight={'700'}
-                                  >
-                                    {' '}
-                                    Due in 3 Days{' '}
-                                  </Typography>
-                                </div>
+                        <CardContent
+                          style={{
+                            backgroundColor: "#fff5f4",
+                            padding: "12px 16px",
+                          }}
+                        >
+                          <Stack
+                            direction={"row"}
+                            alignItems={"center"}
+                            justifyContent={"space-between"}
+                          >
+                            <Stack direction={"column"} gap={0.3}>
+                              <div
+                                style={{
+                                  display: "inline-flex",
+                                  alignSelf: "flex-start",
+                                  backgroundColor: "#C0392B",
+                                  borderRadius: "4px",
+                                  padding: "1px 8px",
+                                  marginBottom: 4,
+                                }}
+                              >
                                 <Typography
-                                  variant='subtitle1'
-                                  component='subtitle1'
-                                  fontFamily={'Inter'}
-                                  fontWeight={'700'}
+                                  fontFamily={"'DM Sans', sans-serif"}
+                                  color={"white"}
+                                  fontSize={"10px"}
+                                  fontWeight={"700"}
+                                  letterSpacing={"0.3px"}
                                 >
-                                  Cases with 3 Days Deadline
+                                  Due in 3 Days
                                 </Typography>
-                                <Typography
-                                  variant='h5'
-                                  component='h5'
-                                  fontWeight={'700'}
-                                >
-                                  9
-                                </Typography>
-                              </Stack>
-                              <img
-                                src={i1}
-                                alt='alert'
-                                width={40}
-                                height={40}
-                              />
-                              <AvatarGroup max={4}>
-                                <Avatar alt='Travis Howard' src={p2} />
-                                <Avatar alt='Cindy Baker' src={p3} />
-                                <Avatar alt='Agnes Walker' src={p4} />
-                                <Avatar alt='Trevor Henderson' src={p5} />
-                              </AvatarGroup>
-                              <MoreVertOutlinedIcon
-                                style={{ marginTop: '10px' }}
-                              />
+                              </div>
+                              <Typography
+                                fontFamily={"'DM Sans', sans-serif"}
+                                fontSize={13}
+                                fontWeight={600}
+                                color={"#1a3a5c"}
+                              >
+                                Cases with 3 Days Deadline
+                              </Typography>
+                              <Typography
+                                fontFamily={"'DM Sans', sans-serif"}
+                                fontSize={22}
+                                color={"#C0392B"}
+                                lineHeight={1.1}
+                              >
+                                9
+                              </Typography>
                             </Stack>
-                          </CardContent>
-                        </Card>
-                      </Link>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Link
-                        to={'/dashboard/firstNotice'}
-                        style={{ textDecoration: 'none' }}
+                            <Stack
+                              direction={"row"}
+                              alignItems={"center"}
+                              gap={1.5}
+                            >
+                              <div
+                                style={{
+                                  width: 44,
+                                  height: 44,
+                                  borderRadius: "10px",
+                                  backgroundColor: "#fff0ee",
+                                  border: "1px solid #fcd0cc",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  flexShrink: 0,
+                                }}
+                              >
+                                <AccessAlarmsOutlinedIcon style={{ color: "#C0392B", fontSize: 24 }} />
+                              </div>
+                            </Stack>
+                          </Stack>
+                        </CardContent>
+                      </Card>
+                    </Link>
+
+                    {/* 5 Days Deadline */}
+                    <Link
+                      to={"/dashboard/firstNotice"}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <Card
+                        style={{
+                          borderRadius: "12px",
+                          border: "1px solid #c8ebd4",
+                          cursor: "pointer",
+                        }}
                       >
-                        <Card>
-                          <CardContent style={{ backgroundColor: '#F5F9F5' }}>
-                            <Stack
-                              direction={'row'}
-                              justifyContent={'space-between'}
-                              height={40}
-                            >
-                              <Stack direction={'column'} alignItems={'center'}>
+                        <CardContent
+                          style={{
+                            backgroundColor: "#f2faf4",
+                            padding: "12px 16px",
+                          }}
+                        >
+                          <Stack
+                            direction={"row"}
+                            alignItems={"center"}
+                            justifyContent={"space-between"}
+                          >
+                            <Stack direction={"column"} gap={0.3}>
+                              <div
+                                style={{
+                                  display: "inline-flex",
+                                  alignSelf: "flex-start",
+                                  backgroundColor: "#27ae60",
+                                  borderRadius: "4px",
+                                  padding: "1px 8px",
+                                  marginBottom: 4,
+                                }}
+                              >
                                 <Typography
-                                  variant='subtitle1'
-                                  component='subtitle1'
-                                  fontFamily={'Inter'}
-                                  fontWeight={'700'}
+                                  fontFamily={"'DM Sans', sans-serif"}
+                                  color={"white"}
+                                  fontSize={"10px"}
+                                  fontWeight={"700"}
+                                  letterSpacing={"0.3px"}
                                 >
-                                  Cases with 5days Deadline
+                                  Due in 5 Days
                                 </Typography>
-                                <Typography
-                                  variant='h5'
-                                  component='h5'
-                                  fontWeight={'700'}
-                                >
-                                  16
-                                </Typography>
-                              </Stack>
-                              <img
-                                src={i2}
-                                alt='denger'
-                                width={40}
-                                height={40}
-                              />
-                              <AvatarGroup max={4}>
-                                {/* <Avatar alt="Travis Howard" src={p2} /> */}
-                                <Avatar alt='Cindy Baker' src={p6} />
-                                <Avatar alt='Agnes Walker' src={p7} />
-                                {/* <Avatar alt="Trevor Henderson" src='' /> */}
-                              </AvatarGroup>
-                              <Stack></Stack>
-                              <MoreVertOutlinedIcon
-                                style={{ marginTop: '10px' }}
-                              />
+                              </div>
+                              <Typography
+                                fontFamily={"'DM Sans', sans-serif"}
+                                fontSize={13}
+                                fontWeight={600}
+                                color={"#1a3a5c"}
+                              >
+                                Cases with 5 Days Deadline
+                              </Typography>
+                              <Typography
+                                fontFamily={"'DM Sans', sans-serif"}
+                                fontSize={22}
+                                color={"#27ae60"}
+                                lineHeight={1.1}
+                              >
+                                16
+                              </Typography>
                             </Stack>
-                          </CardContent>
-                        </Card>
-                      </Link>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Link
-                        to={'/dashboard/marginUnderReview'}
-                        style={{ textDecoration: 'none' }}
+                            <Stack
+                              direction={"row"}
+                              alignItems={"center"}
+                              gap={1.5}
+                            >
+                              <div
+                                style={{
+                                  width: 44,
+                                  height: 44,
+                                  borderRadius: "10px",
+                                  backgroundColor: "#f2faf4",
+                                  border: "1px solid #c8ebd4",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  flexShrink: 0,
+                                }}
+                              >
+                                <ScheduleOutlinedIcon style={{ color: "#27ae60", fontSize: 24 }} />
+                              </div>
+                            </Stack>
+                          </Stack>
+                        </CardContent>
+                      </Card>
+                    </Link>
+
+                    {/* Margin Under Review */}
+                    <Link
+                      to={"/dashboard/marginUnderReview"}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <Card
+                        style={{
+                          borderRadius: "12px",
+                          border: "1px solid #f5e4b0",
+                          cursor: "pointer",
+                        }}
                       >
-                        <Card>
-                          <CardContent style={{ backgroundColor: '#FFF9EE' }}>
-                            <Stack
-                              direction={'row'}
-                              justifyContent={'space-between'}
-                              height={40}
-                            >
-                              <Stack></Stack>
-                              <Stack direction={'column'} alignItems={'center'}>
+                        <CardContent
+                          style={{
+                            backgroundColor: "#fffbee",
+                            padding: "12px 16px",
+                          }}
+                        >
+                          <Stack
+                            direction={"row"}
+                            alignItems={"center"}
+                            justifyContent={"space-between"}
+                          >
+                            <Stack direction={"column"} gap={0.3}>
+                              <div
+                                style={{
+                                  display: "inline-flex",
+                                  alignSelf: "flex-start",
+                                  backgroundColor: "#E8A838",
+                                  borderRadius: "4px",
+                                  padding: "1px 8px",
+                                  marginBottom: 4,
+                                }}
+                              >
                                 <Typography
-                                  variant='subtitle1'
-                                  component='subtitle1'
-                                  fontFamily={'Inter'}
-                                  fontWeight={'700'}
+                                  fontFamily={"'DM Sans', sans-serif"}
+                                  color={"white"}
+                                  fontSize={"10px"}
+                                  fontWeight={"700"}
+                                  letterSpacing={"0.3px"}
                                 >
-                                  Margin Under Review
+                                  Under Review
                                 </Typography>
-                                <Typography
-                                  variant='h5'
-                                  component='h5'
-                                  fontWeight={'700'}
-                                >
-                                  12
-                                </Typography>
-                              </Stack>
-                              <Stack></Stack>
-                              <img
-                                src={i3}
-                                alt='alert'
-                                width={40}
-                                height={40}
-                              />
-                              <AvatarGroup max={4}>
-                                <Avatar alt='Travis Howard' src={p8} />
-                                <Avatar alt='Cindy Baker' src={p9} />
-                                <Avatar alt='Agnes Walker' src={p10} />
-                                <Avatar alt='Trevor Henderson' src={p11} />
-                              </AvatarGroup>
-                              <MoreVertOutlinedIcon
-                                style={{ marginTop: '10px' }}
-                              />
+                              </div>
+                              <Typography
+                                fontFamily={"'DM Sans', sans-serif"}
+                                fontSize={13}
+                                fontWeight={600}
+                                color={"#1a3a5c"}
+                              >
+                                Margin Under Review
+                              </Typography>
+                              <Typography
+                                fontFamily={"'DM Sans', sans-serif"}
+                                fontSize={22}
+                                color={"#E8A838"}
+                                lineHeight={1.1}
+                              >
+                                12
+                              </Typography>
                             </Stack>
-                          </CardContent>
-                        </Card>
-                      </Link>
-                    </Grid>
-                  </Grid>
+                            <Stack
+                              direction={"row"}
+                              alignItems={"center"}
+                              gap={1.5}
+                            >
+                              <div
+                                style={{
+                                  width: 44,
+                                  height: 44,
+                                  borderRadius: "10px",
+                                  backgroundColor: "#fffbee",
+                                  border: "1px solid #f5e4b0",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  flexShrink: 0,
+                                }}
+                              >
+                                <PendingActionsOutlinedIcon style={{ color: "#E8A838", fontSize: 24 }} />
+                              </div>
+                            </Stack>
+                          </Stack>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  </Stack>
                 </CardContent>
               </Card>
             </Grid>
